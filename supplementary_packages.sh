@@ -3,18 +3,24 @@
 # Some (opiniated) recommended packages for Debian/Ubuntu/Mint based distros.
 
 # N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
-echo "Installing git...\n"
+echo "\nInstalling git..."
 sudo apt install git -yq
 
 # Install apt-get wrappers:
-echo "Installing package managers...\n"
-sudo apt-get install aptitude -y
-sudo apt-get install synaptic -y
+echo "\nInstalling package managers..."
+sudo apt-get install aptitude -yq
+sudo apt-get install synaptic -yq
+
+# Install xinput:
+echo "\nInstalling xinput..."
+sudo apt-get install xinput -yq
 
 # Install Chromium browser:
-sudo apt-get install chromium-browser -y
+echo "\nInstalling Chromium..."
+sudo apt-get install chromium-browser -yq
 
 # Purge Flash plugin:
+echo "\nPurging Flash plugin..."
 sudo apt-get purge flashplugin-installer -y
 sudo apt-mark hold flashplugin-installer
 VARIANTS="iceape iceweasel mozilla firefox xulrunner midbrowser xulrunner-addons"
@@ -34,4 +40,9 @@ sudo update-alternatives --quiet --remove "$x-flashplugin" /var/lib/flashplugin-
 done
 
 # Install gparted:
+echo "/nInstalling gparted..."
 sudo apt-get install gparted -yq
+
+# Install VLC Player:
+echo "/nInstalling VLC Player..."
+sudo apt-get install vlc -yq

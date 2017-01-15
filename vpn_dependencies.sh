@@ -14,7 +14,7 @@ Install_packages () {
     echo "deb http://cz.archive.ubuntu.com/ubuntu trusty main universe" >> /etc/apt/sources.list
     apt-get update
     apt-get install libjsoncpp0 -yq
-    echo "\nNOTE: etc/apt/sources.list was modified to include mirrors that contain untrusted packages!"
+    echo "\nNOTE: /etc/apt/sources.list was modified to include mirrors that contain untrusted packages!"
     echo "You may want to remove this line from your sources: deb http://cz.archive.ubuntu.com/ubuntu trusty main universe"
 }
 
