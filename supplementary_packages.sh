@@ -45,4 +45,9 @@ sudo apt-get install gparted -yq
 
 # Install VLC Player:
 echo "/nInstalling VLC Player..."
+
+# Install qBittorrent:
+echo "/nInstalling qBittorrent..."
+sudo apt-get install qbittorrent -yq
+
 sudo apt-get install vlc -yq
