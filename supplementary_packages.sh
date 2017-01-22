@@ -2,6 +2,9 @@
 
 # Some (opiniated) recommended packages for Debian/Ubuntu/Mint based distros.
 
+# Update packages:
+sudo apt-get update
+
 # N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
 echo "\nInstalling git..."
 sudo apt install git -yq
@@ -10,6 +13,11 @@ sudo apt install git -yq
 echo "\nInstalling package managers..."
 sudo apt-get install aptitude -yq
 sudo apt-get install synaptic -yq
+
+# Install lvm2:
+echo "\nInstalling lvm2..."
+# N.b. this also resolves booting issues with Linux kernel 4.8.0-34-generic (earlier kernel releases don't seem to have this issue):
+sudo apt-get install lvm2 -yq
 
 # Install xinput:
 echo "\nInstalling xinput..."
