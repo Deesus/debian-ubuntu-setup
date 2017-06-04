@@ -65,7 +65,34 @@ sudo apt-get install qbittorrent -yq
 # Install Nvidia drivers:
 # n.b. the version of your package depends on your OS and card (don't use .run files)
 # see https://help.ubuntu.com/community/BinaryDriverHowto/Nvidia
-echo "/nInstalling Nvidia 375 drivers."
+echo "/nInstalling Nvidia 375 drivers..."
 echo "/nNote: The specific package you need will depend on your OS and your card."
 sudo apt-get install nvidia-375 nvidia-settings
+
+# Install vim:
+echo "/nInstalling vim.."
+sudo apt-get install vim -yq
+
+# set tab spaces:
+cat <<EOF >> ~/.vimrc
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+    " Use filetype detection and file-based automatic indenting.
+    filetype plugin indent on
+
+    " Use actual tab chars in Makefiles.
+    autocmd FileType make set tabstop=8 shiftwidth=8 softtabstop=0 noexpandtab
+endif
+
+" For everything else, use a tab width of 4 space chars.
+set tabstop=4       " The width of a TAB is set to 4.
+                    " Still it is a \t. It is just that
+                    " Vim will interpret it to be having
+                    " a width of 4.
+set shiftwidth=4    " Indents will have a width of 4.
+set softtabstop=4   " Sets the number of columns for a TAB.
+set expandtab       " Expand TABs to spaces.
+
+EOF
 
