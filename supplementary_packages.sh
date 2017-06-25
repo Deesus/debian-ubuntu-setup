@@ -2,8 +2,10 @@
 
 # Some (opiniated) recommended packages for Debian/Ubuntu/Mint based distros.
 
-# Add graphics drivers ppa:
-sudo add-apt-repository ppa:graphics-drivers/ppa
+# Add respositories:
+sudo add-apt-repository ppa:graphics-drivers/ppa            # add graphics drivers ppa
+sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next    # add ffmpeg ppa
+sudo add-apt-repository ppa:obsproject/obs-studio           # add OBS ppa
 
 # Update packages:
 sudo apt-get update
@@ -61,6 +63,10 @@ sudo apt-get install vlc -yq
 # Install qBittorrent:
 echo "/nInstalling qBittorrent..."
 sudo apt-get install qbittorrent -yq
+
+# Install OBS:
+sudo apt-get install ffmpeg -yq
+sudo apt-get install obs-studio -yq
 
 # Install curl:
 echo "/nInstalling curl..."
