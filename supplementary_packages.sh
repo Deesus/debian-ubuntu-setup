@@ -62,6 +62,10 @@ sudo apt-get install vlc -yq
 echo "/nInstalling qBittorrent..."
 sudo apt-get install qbittorrent -yq
 
+# Install curl:
+echo "/nInstalling curl..."
+sudo apt-get install curl -yq
+
 # Install vim:
 echo "/nInstalling vim.."
 sudo apt-get install vim -yq
