@@ -2,8 +2,10 @@
 
 # Some (opiniated) recommended packages for Debian/Ubuntu/Mint based distros.
 
-# Add graphics drivers ppa:
-sudo add-apt-repository ppa:graphics-drivers/ppa
+# Add respositories:
+sudo add-apt-repository ppa:graphics-drivers/ppa            # add graphics drivers ppa
+sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next    # add ffmpeg ppa
+sudo add-apt-repository ppa:obsproject/obs-studio           # add OBS ppa
 
 # Update packages:
 sudo apt-get update
@@ -62,12 +64,13 @@ sudo apt-get install vlc -yq
 echo "/nInstalling qBittorrent..."
 sudo apt-get install qbittorrent -yq
 
-# Install Nvidia drivers:
-# n.b. the version of your package depends on your OS and card (don't use .run files)
-# see https://help.ubuntu.com/community/BinaryDriverHowto/Nvidia
-echo "/nInstalling Nvidia 375 drivers..."
-echo "/nNote: The specific package you need will depend on your OS and your card."
-sudo apt-get install nvidia-375 nvidia-settings
+# Install OBS:
+sudo apt-get install ffmpeg -yq
+sudo apt-get install obs-studio -yq
+
+# Install curl:
+echo "/nInstalling curl..."
+sudo apt-get install curl -yq
 
 # Install vim:
 echo "/nInstalling vim.."
