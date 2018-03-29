@@ -1,14 +1,19 @@
 #!/bin/bash
 
-# Some (opiniated) recommended packages for Debian/Ubuntu/Mint based distros.
+# Some (opiniated) packages for Kubuntu Plasma 5 desktop:
 
 # Add respositories:
+sudo add-apt-repository ppa:papirus/papirus                 # Arc KDE Theme
 sudo add-apt-repository ppa:graphics-drivers/ppa            # add graphics drivers ppa
 sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next    # add ffmpeg ppa
 sudo add-apt-repository ppa:obsproject/obs-studio           # add OBS ppa
 
 # Update packages:
 sudo apt-get update
+
+# Add snap package manager:
+echo "\nInstalling snap package manager..."
+sudo apt install snapd
 
 # N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
 echo "\nInstalling Git..."
@@ -98,4 +103,21 @@ set softtabstop=4   " Sets the number of columns for a TAB.
 set expandtab       " Expand TABs to spaces.
 
 EOF
+
+# Installs Arc Dark Theme for KDE Plasma 5
+# Also installs Papirus icon theme for consitent look
+# <https://github.com/PapirusDevelopmentTeam/arc-kde>
+# <https://github.com/PapirusDevelopmentTeam/papirus-icon-theme>
+echo "\nInstalling Arc Dark Theme for KDE..."
+sudo apt-get install --install-recommends arc-kde
+sudo apt-get install papirus-icon-theme
+
+
+echo "\n A few more steps are needed before you DE is updated to Arc Dark."
+echo "\n1. Go to Icons and select Papirus-Dark."
+echo "\n2. Go to Settings > Color and choose Arc Dark."
+echo "\n3. Run Kvantum manager and select ArcDark theme."
+echo "\n4. Go to Desktop Theme and change to Arc Dark."
+echo "\n5. You should also change the desktop wallpaper."
+echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fixer"
 
