@@ -121,3 +121,5 @@ echo "\n4. Go to Desktop Theme and change to Arc Dark."
 echo "\n5. You should also change the desktop wallpaper."
 echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fixer"
 
+# Disable baloo_file_extractor:
+sudo balooctl disable
