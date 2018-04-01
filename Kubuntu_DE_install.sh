@@ -57,10 +57,6 @@ for x in $VARIANTS; do
 sudo update-alternatives --quiet --remove "$x-flashplugin" /var/lib/flashplugin-installer/npwrapper.libflashplayer.so;
 done
 
-# Install gparted:
-echo "/nInstalling gparted..."
-sudo apt-get install gparted -yq
-
 # Install VLC Player:
 echo "/nInstalling VLC Player..."
 sudo apt-get install vlc -yq
@@ -70,6 +66,7 @@ echo "/nInstalling qBittorrent..."
 sudo apt-get install qbittorrent -yq
 
 # Install OBS:
+echo "/nInstalling OBS..."
 sudo apt-get install ffmpeg -yq
 sudo apt-get install obs-studio -yq
 
@@ -77,8 +74,8 @@ sudo apt-get install obs-studio -yq
 echo "/nInstalling curl..."
 sudo apt-get install curl -yq
 
-# Install vim:
-echo "/nInstalling vim.."
+# Install Vim:
+echo "/nInstalling Vim.."
 sudo apt-get install vim -yq
 
 # set tab spaces:
@@ -122,4 +119,5 @@ echo "\n5. You should also change the desktop wallpaper."
 echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fixer"
 
 # Disable baloo_file_extractor:
+echo "\n Disabling baloo_file_extractor..."
 sudo balooctl disable
