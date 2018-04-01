@@ -1,20 +1,31 @@
-# Useful packages & fixes for Debian/Ubuntu
+# Environment Setup for KDE Plasma 5/Kubuntu
 
-All scripts are specific to x64 architecture.
+Supplemental packages and fixes for my KDE Desktop setup.
+N.b. specific to x64 architecture and Plasma 5.
 
-The `Debian/` folder contains Debian-specific patches/packages.
-The `Ubuntu/` folder contains Ubuntu-specific patches/packages.
-
-### Package list:
-- lvm2
-- xinput
-- gparted
-- Git
-- aptitude
-- synaptic
-- qBittorrent
-- Chromium
-- VLC Player
+### Installs:
+* Arc Dark Theme (plus icons) for KDE
+* Package managers:
+    - aptitude 
+    - synaptic
+* Applications:
+    - qBittorrent
+    - Chromium
+    - Vim
+    - OBS (Open Broadcaster Software)
+    - VLC Player
+* Utilities:
+    - git
+    - curl
+    - lvm2 (logical volume manager)
+    - xinput (configure and test X input devices)
+* Fixes:
+    - purges Flash plugin
+    - disables baloo_file_extractor
+    
+### TODO:
++ [ ] Organize script into logical divisions (as noted in README).
++ [ ] Include patch to remove kwallet from OS.
 
 ### License:
-Copyright © 2017 Dee Reddy. BSD-2 License.
+Copyright © 2017-2018 Dee Reddy. BSD-2 License.
