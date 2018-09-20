@@ -21,12 +21,11 @@ N.b. specific to x64 architecture and Plasma 5.
     - xinput (configure and test X input devices)
 
 ### Fixes:
-    - purges Flash plugin
-    - disables baloo_file_extractor
-    - replaces [PIA](https://www.privateinternetaccess.com/) tray icons
+* purges Flash plugin
+* disables baloo_file_extractor
+* replaces [PIA](https://www.privateinternetaccess.com/) tray icons
     
 ### TODO:
-+ [ ] Organize script into logical divisions (as noted in README).
 + [ ] Include patch to remove kwallet from OS.
 
 ### License:
