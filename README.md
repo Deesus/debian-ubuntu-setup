@@ -19,9 +19,11 @@ N.b. specific to x64 architecture and Plasma 5.
     - curl
     - lvm2 (logical volume manager)
     - xinput (configure and test X input devices)
-* Fixes:
+
+### Fixes:
     - purges Flash plugin
     - disables baloo_file_extractor
+    - replaces [PIA](https://www.privateinternetaccess.com/) tray icons
     
 ### TODO:
 + [ ] Organize script into logical divisions (as noted in README).

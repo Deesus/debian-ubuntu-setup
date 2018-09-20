@@ -11,6 +11,11 @@ sudo add-apt-repository ppa:obsproject/obs-studio           # add OBS ppa
 # Update packages:
 sudo apt-get update
 
+
+########################################
+# Install packages:
+########################################
+
 # Add snap package manager:
 echo "\nInstalling snap package manager..."
 sudo apt install snapd
@@ -37,26 +42,6 @@ sudo apt-get install xinput -yq
 echo "\nInstalling Chromium..."
 sudo apt-get install chromium-browser -yq
 
-# Purge Flash plugin:
-echo "\nPurging Flash plugin..."
-sudo apt-get purge flashplugin-installer -y
-sudo apt-mark hold flashplugin-installer
-VARIANTS="iceape iceweasel mozilla firefox xulrunner midbrowser xulrunner-addons"
-sudo update-rc.d -f flashplugin-installer remove >/dev/null 2>&1
-sudo rm -rf /usr/lib/flashplugin-installer-unpackdir
-sudo rm -rf /usr/lib/flashplugin-installer/*
-sudo rm -f /var/lib/flashplugin-installer/*
-sudo rm -rf /var/cache/flashplugin-installer-unpackdir
-sudo rm -rf /var/cache/flashplugin-installer
-sudo rm -f /usr/share/ubufox/plugins/libflashplayer.so
-sudo rm -f /usr/share/ubufox/plugins/npwrapper.libflashplayer.so
-for x in $VARIANTS; do
-    sudo update-alternatives --quiet --remove "$x-flashplugin" /usr/lib/flashplugin-installer/libflashplayer.so;
-done
-for x in $VARIANTS; do
-    sudo update-alternatives --quiet --remove "$x-flashplugin" /var/lib/flashplugin-installer/npwrapper.libflashplayer.so;
-done
-
 # Install VLC Player:
 echo "/nInstalling VLC Player..."
 sudo apt-get install vlc -yq
@@ -78,7 +63,35 @@ sudo apt-get install curl -yq
 echo "/nInstalling Vim.."
 sudo apt-get install vim -yq
 
-# set tab spaces:
+
+########################################
+# Purge Flash plugin:
+########################################
+
+echo "\nPurging Flash plugin..."
+sudo apt-get purge flashplugin-installer -y
+sudo apt-mark hold flashplugin-installer
+VARIANTS="iceape iceweasel mozilla firefox xulrunner midbrowser xulrunner-addons"
+sudo update-rc.d -f flashplugin-installer remove >/dev/null 2>&1
+sudo rm -rf /usr/lib/flashplugin-installer-unpackdir
+sudo rm -rf /usr/lib/flashplugin-installer/*
+sudo rm -f /var/lib/flashplugin-installer/*
+sudo rm -rf /var/cache/flashplugin-installer-unpackdir
+sudo rm -rf /var/cache/flashplugin-installer
+sudo rm -f /usr/share/ubufox/plugins/libflashplayer.so
+sudo rm -f /usr/share/ubufox/plugins/npwrapper.libflashplayer.so
+for x in $VARIANTS; do
+    sudo update-alternatives --quiet --remove "$x-flashplugin" /usr/lib/flashplugin-installer/libflashplayer.so;
+done
+for x in $VARIANTS; do
+    sudo update-alternatives --quiet --remove "$x-flashplugin" /var/lib/flashplugin-installer/npwrapper.libflashplayer.so;
+done
+
+
+########################################
+# Set tab spaces:
+########################################
+
 cat <<EOF >> ~/.vimrc
 
 " Only do this part when compiled with support for autocommands.
@@ -101,28 +114,11 @@ set expandtab       " Expand TABs to spaces.
 
 EOF
 
-# Installs Arc Dark Theme for KDE Plasma 5
-# Also installs Papirus icon theme for consitent look
-# <https://github.com/PapirusDevelopmentTeam/arc-kde>
-# <https://github.com/PapirusDevelopmentTeam/papirus-icon-theme>
-echo "\nInstalling Arc Dark Theme for KDE..."
-sudo apt-get install --install-recommends arc-kde
-sudo apt-get install papirus-icon-theme
 
+########################################
+# Install PIA (Private Internet Access VPN) tray icons:
+########################################
 
-echo "\n A few more steps are needed before you DE is updated to Arc Dark."
-echo "\n1. Go to Icons and select Papirus-Dark."
-echo "\n2. Go to Settings > Color and choose Arc Dark."
-echo "\n3. Run Kvantum manager and select ArcDark theme."
-echo "\n4. Go to Desktop Theme and change to Arc Dark."
-echo "\n5. You should also change the desktop wallpaper."
-echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fixer"
-
-# Disable baloo_file_extractor:
-echo "\n Disabling baloo_file_extractor..."
-sudo balooctl disable
-
-# Install PIA (Private Internet Access VPN) icons:
 PIA_DIRECTORY=/opt/pia/frontend/img
 
 # check if directory exists:
@@ -146,3 +142,30 @@ if [ -d "$PIA_DIRECTORY" ]; then
         
     fi
 fi
+
+
+########################################
+# Install Arc Dark Theme for KDE Plasma 5:
+########################################
+
+# N.b. installing Arc Dark Theme should always be last in script, since the user needs to read the console message after installing
+
+# Also installs Papirus icon theme for consitent look
+# <https://github.com/PapirusDevelopmentTeam/arc-kde>
+# <https://github.com/PapirusDevelopmentTeam/papirus-icon-theme>
+echo "\nInstalling Arc Dark Theme for KDE..."
+sudo apt-get install --install-recommends arc-kde
+sudo apt-get install papirus-icon-theme
+
+
+echo "\n A few more steps are needed before you DE is updated to Arc Dark."
+echo "\n1. Go to Icons and select Papirus-Dark."
+echo "\n2. Go to Settings > Color and choose Arc Dark."
+echo "\n3. Run Kvantum manager and select ArcDark theme."
+echo "\n4. Go to Desktop Theme and change to Arc Dark."
+echo "\n5. You should also change the desktop wallpaper."
+echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fixer"
+
+# Disable baloo_file_extractor:
+echo "\n Disabling baloo_file_extractor..."
+sudo balooctl disable
