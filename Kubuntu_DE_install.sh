@@ -51,10 +51,10 @@ sudo rm -rf /var/cache/flashplugin-installer
 sudo rm -f /usr/share/ubufox/plugins/libflashplayer.so
 sudo rm -f /usr/share/ubufox/plugins/npwrapper.libflashplayer.so
 for x in $VARIANTS; do
-sudo update-alternatives --quiet --remove "$x-flashplugin" /usr/lib/flashplugin-installer/libflashplayer.so;
+    sudo update-alternatives --quiet --remove "$x-flashplugin" /usr/lib/flashplugin-installer/libflashplayer.so;
 done
 for x in $VARIANTS; do
-sudo update-alternatives --quiet --remove "$x-flashplugin" /var/lib/flashplugin-installer/npwrapper.libflashplayer.so;
+    sudo update-alternatives --quiet --remove "$x-flashplugin" /var/lib/flashplugin-installer/npwrapper.libflashplayer.so;
 done
 
 # Install VLC Player:
@@ -121,3 +121,28 @@ echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fix
 # Disable baloo_file_extractor:
 echo "\n Disabling baloo_file_extractor..."
 sudo balooctl disable
+
+# Install PIA (Private Internet Access VPN) icons:
+PIA_DIRECTORY=/opt/pia/frontend/img
+
+# check if directory exists:
+if [ -d "$PIA_DIRECTORY" ]; then 
+    # ignore symlinks:
+    if [ ! -L "$PIA_DIRECTORY" ]; then
+        # directory found
+        
+        # backup icons:
+        echo "Found PIA (VPN)"
+        echo "backing up icons in the '$PIA_DIRECTORYoriginal_icons' folder..."
+        sudo mkdir $PIA_DIRECTORY/original_icons
+        sudo mv $PIA_DIRECTORY/tray_connected.png $PIA_DIRECTORY/original_icons/
+        sudo mv $PIA_DIRECTORY/tray_connecting.png $PIA_DIRECTORY/original_icons/
+        sudo mv $PIA_DIRECTORY/tray_disconnected.png $PIA_DIRECTORY/original_icons/
+        
+        # copy new icons into folder:
+        sudo cp ./icons/pia/tray_connected.png $PIA_DIRECTORY/tray_connected.png
+        sudo cp ./icons/pia/tray_connecting.png $PIA_DIRECTORY/tray_connecting.png
+        sudo cp ./icons/pia/tray_disconnected.png $PIA_DIRECTORY/tray_disconnected.png
+        
+    fi
+fi
