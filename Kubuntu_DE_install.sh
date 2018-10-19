@@ -63,6 +63,10 @@ sudo apt-get install curl -yq
 echo "/nInstalling Vim.."
 sudo apt-get install vim -yq
 
+# Install KeePassX:
+echo "/nInstallling KeePassX..."
+sudo apt-get install keepassx -yq
+
 
 ########################################
 # Purge Flash plugin:
@@ -166,6 +170,11 @@ echo "\n4. Go to Desktop Theme and change to Arc Dark."
 echo "\n5. You should also change the desktop wallpaper."
 echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fixer"
 
+
+########################################
+# Misc.:
+########################################
+
 # Disable baloo_file_extractor:
-echo "\n Disabling baloo_file_extractor..."
+echo "\nDisabling baloo_file_extractor..."
 sudo balooctl disable
