@@ -7,10 +7,10 @@ sudo add-apt-repository ppa:papirus/papirus                 # Arc KDE Theme
 sudo add-apt-repository ppa:graphics-drivers/ppa            # add graphics drivers ppa
 sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next    # add ffmpeg ppa
 sudo add-apt-repository ppa:obsproject/obs-studio           # add OBS ppa
+sudo add-apt-repository ppa:lyzardking/ubuntu-make          # add Ubuntu Make
 
 # Update packages:
 sudo apt-get update
-
 
 ########################################
 # Install packages:
@@ -20,6 +20,10 @@ sudo apt-get update
 echo "\nInstalling snap package manager..."
 sudo apt install snapd
 
+# Add Ubuntu Make:
+echo "\nInstalling Ubuntu Make..."
+sudo apt-get install ubuntu-make -yq
+
 # N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
 echo "\nInstalling Git..."
 sudo apt install git -yq
@@ -28,11 +32,6 @@ sudo apt install git -yq
 echo "\nInstalling package managers..."
 sudo apt-get install aptitude -yq
 sudo apt-get install synaptic -yq
-
-# Install lvm2:
-echo "\nInstalling lvm2..."
-# N.b. this also resolves booting issues with Linux kernel 4.8.0-34-generic (earlier kernel releases don't seem to have this issue):
-sudo apt-get install lvm2 -yq
 
 # Install xinput:
 echo "\nInstalling xinput..."
@@ -45,15 +44,6 @@ sudo apt-get install chromium-browser -yq
 # Install VLC Player:
 echo "/nInstalling VLC Player..."
 sudo apt-get install vlc -yq
-
-# Install qBittorrent:
-echo "/nInstalling qBittorrent..."
-sudo apt-get install qbittorrent -yq
-
-# Install OBS:
-echo "/nInstalling OBS..."
-sudo apt-get install ffmpeg -yq
-sudo apt-get install obs-studio -yq
 
 # Install curl:
 echo "/nInstalling curl..."
@@ -157,6 +147,7 @@ fi
 # Also installs Papirus icon theme for consitent look
 # <https://github.com/PapirusDevelopmentTeam/arc-kde>
 # <https://github.com/PapirusDevelopmentTeam/papirus-icon-theme>
+# TODO: also consdier Adapta: <https://github.com/PapirusDevelopmentTeam/adapta-kde>, Numix: <https://github.com/varlesh/numix-kde-theme>, or Maia Transparent: <https://store.kde.org/p/1085371/>
 echo "\nInstalling Arc Dark Theme for KDE..."
 sudo apt-get install --install-recommends arc-kde
 sudo apt-get install papirus-icon-theme
@@ -178,3 +169,22 @@ echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fix
 # Disable baloo_file_extractor:
 echo "\nDisabling baloo_file_extractor..."
 sudo balooctl disable
+
+
+########################################
+# Optional Packages:
+########################################
+
+# # Install qBittorrent:
+# echo "/nInstalling qBittorrent..."
+# sudo apt-get install qbittorrent -yq
+
+# # Install OBS:
+# echo "/nInstalling OBS..."
+# sudo apt-get install ffmpeg -yq
+# sudo apt-get install obs-studio -yq
+
+# # Install lvm2:
+# echo "\nInstalling lvm2..."
+# # N.b. this also resolves booting issues with Linux kernel 4.8.0-34-generic (earlier kernel releases don't seem to have this issue):
+# sudo apt-get install lvm2 -yq
