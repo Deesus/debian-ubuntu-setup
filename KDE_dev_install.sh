@@ -1,16 +1,14 @@
 #!/bin/bash
 
-# Some (opiniated) packages for Kubuntu Plasma 5 desktop:
+# Some (opiniated) packages for KDE Plasma 5 desktop:
 
 # Add respositories:
 sudo add-apt-repository ppa:papirus/papirus                 # Arc KDE Theme
-sudo add-apt-repository ppa:graphics-drivers/ppa            # add graphics drivers ppa
-sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next    # add ffmpeg ppa
-sudo add-apt-repository ppa:obsproject/obs-studio           # add OBS ppa
 sudo add-apt-repository ppa:lyzardking/ubuntu-make          # add Ubuntu Make
 
 # Update packages:
 sudo apt-get update
+
 
 ########################################
 # Install packages:
@@ -20,18 +18,9 @@ sudo apt-get update
 echo "\nInstalling snap package manager..."
 sudo apt install snapd
 
-# Add Ubuntu Make:
-echo "\nInstalling Ubuntu Make..."
-sudo apt-get install ubuntu-make -yq
-
-# N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
-echo "\nInstalling Git..."
-sudo apt install git -yq
-
 # Install apt-get wrappers:
 echo "\nInstalling package managers..."
 sudo apt-get install aptitude -yq
-sudo apt-get install synaptic -yq
 
 # Install xinput:
 echo "\nInstalling xinput..."
@@ -56,6 +45,42 @@ sudo apt-get install vim -yq
 # Install KeePassX:
 echo "/nInstallling KeePassX..."
 sudo apt-get install keepassx -yq
+
+
+########################################
+# Install DEV packages:
+########################################
+
+##### Install NodeJS and npm: #####
+echo "\nInstalling NodeJS (8.x LTS) and npm..."
+curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+sudo chown -R $(whoami) ~/.npm # give user permission to delete
+sudo chown -R $(whoami) ~/.config # give user access to config
+
+# Add Ubuntu Make:
+echo "\nInstalling Ubuntu Make..."
+sudo apt-get install ubuntu-make -yq
+
+# N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
+echo "\nInstalling Git..."
+sudo apt install git -yq
+
+# Install Vue.js (from npm):
+echo "\nInstalling Vue.js..."
+sudo npm install vue-cli -g --save-dev
+
+##### Python: #####
+# Install important Python packages:
+echo "\nInstalling important Python packages..."
+
+# pip3 for Python 3:
+curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3
+python3 get-pip.py --user
+
+# pipenv:
+sudo -H pip install -U pipenv
 
 
 ########################################
@@ -170,10 +195,20 @@ echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fix
 echo "\nDisabling baloo_file_extractor..."
 sudo balooctl disable
 
+# create bash aliases file:
+touch ~/.bash_aliases
+
 
 ########################################
 # Optional Packages:
 ########################################
+
+# sudo add-apt-repository ppa:graphics-drivers/ppa            # add graphics drivers ppa
+# sudo add-apt-repository ppa:kirillshkrogalev/ffmpeg-next    # add ffmpeg ppa
+# sudo add-apt-repository ppa:obsproject/obs-studio           # add OBS ppa
+
+# # Update packages:
+# sudo apt-get update
 
 # # Install qBittorrent:
 # echo "/nInstalling qBittorrent..."
