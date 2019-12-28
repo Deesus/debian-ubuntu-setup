@@ -3,8 +3,11 @@
 # Some (opiniated) packages for KDE Plasma 5 desktop:
 
 # Add respositories:
-sudo add-apt-repository ppa:papirus/papirus                 # Arc KDE Theme
 sudo add-apt-repository ppa:lyzardking/ubuntu-make          # add Ubuntu Make
+
+# Install VSCodium:
+wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add - 
+echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list.d/vscodium.list 
 
 # Update packages:
 sudo apt-get update
@@ -15,35 +18,27 @@ sudo apt-get update
 ########################################
 
 # Add snap package manager:
-echo "\nInstalling snap package manager..."
 sudo apt install snapd
 
 # Install apt-get wrappers:
-echo "\nInstalling package managers..."
 sudo apt-get install aptitude -yq
 
 # Install xinput:
-echo "\nInstalling xinput..."
 sudo apt-get install xinput -yq
 
 # Install Chromium browser:
-echo "\nInstalling Chromium..."
 sudo apt-get install chromium-browser -yq
 
 # Install VLC Player:
-echo "/nInstalling VLC Player..."
 sudo apt-get install vlc -yq
 
 # Install curl:
-echo "/nInstalling curl..."
 sudo apt-get install curl -yq
 
 # Install Vim:
-echo "/nInstalling Vim.."
 sudo apt-get install vim -yq
 
 # Install KeePassX:
-echo "/nInstallling KeePassX..."
 sudo apt-get install keepassx -yq
 
 
@@ -51,36 +46,35 @@ sudo apt-get install keepassx -yq
 # Install DEV packages:
 ########################################
 
+# N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
+sudo apt install git -yq
+
 ##### Install NodeJS and npm: #####
-echo "\nInstalling NodeJS (8.x LTS) and npm..."
-curl -sL https://deb.nodesource.com/setup_12.x | sudo -E bash -
-sudo apt-get install -y nodejs
+sudo apt-get purge nodejs -y # purge apt-get version
+sudo snap install node --channel=12/stable --classic
 
 sudo chown -R $(whoami) ~/.npm # give user permission to delete
 sudo chown -R $(whoami) ~/.config # give user access to config
 
 # Add Ubuntu Make:
-echo "\nInstalling Ubuntu Make..."
 sudo apt-get install ubuntu-make -yq
 
-# N.b. git is not preinstalled in some Debian/Ubuntu/Mint distros:
-echo "\nInstalling Git..."
-sudo apt install git -yq
-
 # Install Vue.js (from npm):
-echo "\nInstalling Vue.js..."
 sudo npm install vue-cli -g --save-dev
 
 ##### Python: #####
-# Install important Python packages:
-echo "\nInstalling important Python packages..."
-
 # pip3 for Python 3:
-curl -sS https://bootstrap.pypa.io/get-pip.py | sudo python3
-python3 get-pip.py --user
+sudo apt install python3-pip -y
 
 # pipenv:
-sudo -H pip install -U pipenv
+pip install --user pipenv
+
+# reinstall due to this issue: <https://stackoverflow.com/questions/51225750/installation-of-pipenv-causes-pip3-unusable>
+sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
+
+##### IDEs: #####
+# Install VSCodium:
+sudo apt install codium -y
 
 
 ########################################
@@ -132,59 +126,6 @@ set softtabstop=4   " Sets the number of columns for a TAB.
 set expandtab       " Expand TABs to spaces.
 
 EOF
-
-
-########################################
-# Install PIA (Private Internet Access VPN) tray icons:
-########################################
-
-PIA_DIRECTORY=/opt/pia/frontend/img
-
-# check if directory exists:
-if [ -d "$PIA_DIRECTORY" ]; then 
-    # ignore symlinks:
-    if [ ! -L "$PIA_DIRECTORY" ]; then
-        # directory found
-        
-        # backup icons:
-        echo "Found PIA (VPN)"
-        echo "backing up icons in the '$PIA_DIRECTORYoriginal_icons' folder..."
-        sudo mkdir $PIA_DIRECTORY/original_icons
-        sudo mv $PIA_DIRECTORY/tray_connected.png $PIA_DIRECTORY/original_icons/
-        sudo mv $PIA_DIRECTORY/tray_connecting.png $PIA_DIRECTORY/original_icons/
-        sudo mv $PIA_DIRECTORY/tray_disconnected.png $PIA_DIRECTORY/original_icons/
-        
-        # copy new icons into folder:
-        sudo cp ./icons/pia/tray_connected.png $PIA_DIRECTORY/tray_connected.png
-        sudo cp ./icons/pia/tray_connecting.png $PIA_DIRECTORY/tray_connecting.png
-        sudo cp ./icons/pia/tray_disconnected.png $PIA_DIRECTORY/tray_disconnected.png
-        
-    fi
-fi
-
-
-########################################
-# Install Arc Dark Theme for KDE Plasma 5:
-########################################
-
-# N.b. installing Arc Dark Theme should always be last in script, since the user needs to read the console message after installing
-
-# Also installs Papirus icon theme for consitent look
-# <https://github.com/PapirusDevelopmentTeam/arc-kde>
-# <https://github.com/PapirusDevelopmentTeam/papirus-icon-theme>
-# TODO: also consdier Adapta: <https://github.com/PapirusDevelopmentTeam/adapta-kde>, Numix: <https://github.com/varlesh/numix-kde-theme>, or Maia Transparent: <https://store.kde.org/p/1085371/>
-echo "\nInstalling Arc Dark Theme for KDE..."
-sudo apt-get install --install-recommends arc-kde
-sudo apt-get install papirus-icon-theme
-
-
-echo "\n A few more steps are needed before you DE is updated to Arc Dark."
-echo "\n1. Go to Icons and select Papirus-Dark."
-echo "\n2. Go to Settings > Color and choose Arc Dark."
-echo "\n3. Run Kvantum manager and select ArcDark theme."
-echo "\n4. Go to Desktop Theme and change to Arc Dark."
-echo "\n5. You should also change the desktop wallpaper."
-echo "\nYou might need hardcode-fixer: https://github.com/Foggalong/hardcode-fixer"
 
 
 ########################################
