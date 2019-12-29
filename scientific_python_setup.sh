@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # See Conda docs: <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/index.html>
-# TODO: need to install Docker first
+
+# Download miniconda:
+wget -O ~/Downloads/miniconda_installer.sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+sh ~/Downloads/miniconda_installer.sh
+
+# After conda has been installed, ensure base environment isn't auto activated <https://github.com/conda/conda/issues/8211>:
+conda config --set auto_activate_base false
 
 ########################################
 # Create Conda environment:
@@ -21,5 +27,5 @@ conda install matplotlib -n nn -y
 docker pull tensorflow/tensorflow:latest-py3-jupyter
 
 # Create aliases:
-echo "\nalias docker_tensorflow=\"docker run -u $(id -u):$(id -g) -it -p 8888:8888 tensorflow/tensorflow:latest-py3-jupyter\"" >> ~/.bash_aliases
+echo "\nalias docker_tensorflow=\"docker run -u \$(id -u):\$(id -g) -it -p 8888:8888 tensorflow/tensorflow:latest-py3-jupyter\"" >> ~/.bash_aliases
 cat ~/.bash_aliases
