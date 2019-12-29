@@ -5,9 +5,15 @@
 # Add respositories:
 sudo add-apt-repository ppa:lyzardking/ubuntu-make          # add Ubuntu Make
 
-# Install VSCodium:
+# VSCodium:
 wget -qO - https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg | sudo apt-key add - 
 echo 'deb https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main' | sudo tee --append /etc/apt/sources.list.d/vscodium.list 
+
+# Docker CE (stable):
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
 
 # Update packages:
 sudo apt-get update
@@ -76,12 +82,47 @@ sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
 # Install VSCodium:
 sudo apt install codium -y
 
+##### Docker: #####
+sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common -y
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+# Post-install steps <https://docs.docker.com/install/linux/linux-postinstall/>:
+sudo groupadd docker
+sudo usermod -aG docker $(whoami)
+
+
+########################################
+# Install Kvantum:
+########################################
+
+sudo apt-get install g++ libx11-dev libxext-dev qtbase5-dev libqt5svg5-dev libqt5x11extras5-dev libkf5windowsystem-dev qttools5-dev-tools cmake checkinstall -y
+
+mkdir -p ~/TEMP/tsujan && cd ~/TEMP/tsujan
+git clone https://github.com/tsujan/Kvantum.git && cd Kvantum
+git checkout master
+
+cd Kvantum
+mkdir build && cd build
+cmake ..
+make
+
+sudo make install
+
+echo "export QT_STYLE_OVERRIDE=kvantum" >> ~/.profile
+
+rm -r ~/TEMP
+
 
 ########################################
 # Purge Flash plugin:
 ########################################
 
-echo "\nPurging Flash plugin..."
 sudo apt-get purge flashplugin-installer -y
 sudo apt-mark hold flashplugin-installer
 VARIANTS="iceape iceweasel mozilla firefox xulrunner midbrowser xulrunner-addons"
@@ -133,7 +174,6 @@ EOF
 ########################################
 
 # Disable baloo_file_extractor:
-echo "\nDisabling baloo_file_extractor..."
 sudo balooctl disable
 
 # create bash aliases file:
