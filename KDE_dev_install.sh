@@ -36,7 +36,7 @@ sudo apt-get install xinput -yq
 sudo apt-get install chromium-browser -yq
 
 # Install VLC Player:
-sudo apt-get install vlc -yq
+sudo aptitude install vlc -yq
 
 # Install curl:
 sudo apt-get install curl -yq
@@ -46,6 +46,9 @@ sudo apt-get install vim -yq
 
 # Install KeePassX:
 sudo apt-get install keepassx -yq
+
+# Install Qalculate!:
+sudo aptitude install qalculate -yq
 
 
 ########################################
