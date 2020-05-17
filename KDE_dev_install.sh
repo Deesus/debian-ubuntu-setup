@@ -23,11 +23,12 @@ sudo apt-get update
 # Install packages:
 ########################################
 
-# Add snap package manager:
-sudo apt install snapd
-
-# Install apt-get wrappers:
+# Install package managers:
+sudo apt install snapd -y
 sudo apt-get install aptitude -yq
+
+# Install curl:
+sudo apt-get install curl -yq
 
 # Install xinput:
 sudo apt-get install xinput -yq
@@ -38,18 +39,17 @@ sudo apt-get install chromium-browser -yq
 # Install VLC Player:
 sudo aptitude install vlc -yq
 
-# Install curl:
-sudo apt-get install curl -yq
-
 # Install Vim:
 sudo apt-get install vim -yq
 
-# Install KeePassX:
-sudo apt-get install keepassx -yq
+# Install KeePassXC:
+sudo aptitude install keepassxc -yq
 
 # Install Qalculate!:
-sudo aptitude install qalculate -yq
+sudo snap install qalculate -yq
 
+# Install Kompare:
+sudo apt-get install kompare -yq
 
 ########################################
 # Install DEV packages:
