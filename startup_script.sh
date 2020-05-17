@@ -5,4 +5,4 @@
 # Fixes ThinkPad's TrackPoint sensitivity:
 # n.b. it looks for the device name "TPPS/2 IBM TrackPoint":
 TRACKPOINTID="$(xinput list --id-only 'TPPS/2 IBM TrackPoint')"
-xinput --set-prop "${TRACKPOINTID}" "libinput Accel Speed" -1.0
+xinput --set-prop "${TRACKPOINTID}" "libinput Accel Speed" -0.7
