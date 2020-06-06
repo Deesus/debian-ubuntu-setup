@@ -42,13 +42,16 @@ sudo aptitude install vlc -yq
 # Install Vim:
 sudo apt-get install vim -yq
 
-# Install KeePassXC:
+# Install password manager (KeePassXC):
 sudo aptitude install keepassxc -yq
 
-# Install Qalculate!:
+# Install checksum tool (GtkHash):
+sudo aptitude install gtkhash -yq
+
+# Install advanced calculator (Qalculate)!:
 sudo snap install qalculate -yq
 
-# Install Kompare:
+# Install file compare tool (Kompare):
 sudo apt-get install kompare -yq
 
 ########################################
