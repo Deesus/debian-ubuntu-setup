@@ -1,3 +1,19 @@
+!/bin/bash
+
+# ########################################
+# Instructions/commands for installing setting up certain packages and configurations.
+# 
+# Please follow the instructions and install each package in the terminal.
+# Because this script install interactive packages, it cannot be run entirely via a single command.
+# 
+# N.b. you should first run the `install_packages.sh` file, as that script installs certain dependencies used here.
+# ########################################
+
+sudo apt update
+# to prevent execution of entire file:
+echo "This script needs to be run manually -- i.e. follow the instructions in the file and run the commands line-by-line."
+exit 1
+
 # ########## install Conda: ##########
 
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
@@ -37,7 +53,6 @@ wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 # TODO: after installation is done, restart terminal before continuing:
 nvm install --lts && nvm use --lts
-
 
 
 # ########## misc. ##########

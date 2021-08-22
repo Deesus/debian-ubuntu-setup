@@ -1,5 +1,12 @@
 !/bin/bash
 
+# ########################################
+# Installs machine learning and web development packages.
+# After running the install script, you might want to install the "interactive" packages (also included in this repo).
+# 
+# Quick start: simply run the file as root: `sudo sh install_packages.sh`
+# ########################################
+
 sudo apt update
 
 # ########## install useful packages: ##########
