@@ -21,8 +21,8 @@ sudo snap install keepassxc
 sudo apt install chromium-browser -yq
 
 # ########## install Jetbrains IDEs: ##########
-sudo snap install pycharm-professional --classic -yq
-sudo snap install webstorm --classic -yq
+sudo snap install pycharm-professional --classic
+sudo snap install webstorm --classic
 
 # ########## misc. ##########
 # create bash aliases file:
