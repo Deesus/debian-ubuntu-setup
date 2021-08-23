@@ -15,7 +15,7 @@ sudo apt install neovim -yq
 sudo apt install curl -yq
 sudo apt install neofetch -yq
 sudo apt install kompare -yq
-sudo snap install keepassxc -yq
+sudo snap install keepassxc
 
 # ########## install apps: ##########
 sudo apt install chromium-browser -yq
