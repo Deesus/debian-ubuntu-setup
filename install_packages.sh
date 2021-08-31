@@ -20,9 +20,15 @@ sudo snap install keepassxc
 # ########## install apps: ##########
 sudo apt install chromium-browser -yq
 
-# ########## install Jetbrains IDEs: ##########
-sudo snap install pycharm-professional --classic
-sudo snap install webstorm --classic
+# install JetBrains Toolbox:
+# TODO: this is a specific app version; we may need to occasionally update the file-path version (last updated 2021-08):
+jetbrains_tarball="jetbrains-toolbox-1.21.9712.tar.gz"
+wget https://download.jetbrains.com/toolbox/$jetbrains_tarball -P ~/Downloads
+# n.b. we need to specify output directory or else tar will extract to pwd:
+tar -xf ~/Downloads/$jetbrains_tarball -C ~/Downloads
+rm ~/Downloads/$jetbrains_tarball
+echo "\njetbrains-toolbox AppImage saved to \/Downloads directory.\n"
+sleep 2
 
 # ########## misc. ##########
 # create bash aliases file:
