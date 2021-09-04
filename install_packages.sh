@@ -4,9 +4,18 @@
 # Installs machine learning and web development packages.
 # After running the install script, you might want to install the "interactive" packages (also included in this repo).
 # 
-# Quick start: simply run the file as root: `sudo sh install_packages.sh`
+# Quick start: execute the file (DO NOT use sudo): `sh install_packages.sh`
 # ########################################
 
+# prevent script from running as root:
+if [ $(whoami) = "root" ]
+then
+    echo "\nDO NOT run this script with sudo!"
+    echo "Exiting...\n"
+    exit 1
+fi
+
+# start of installation:
 sudo apt update
 
 # ########## install useful packages: ##########
@@ -23,11 +32,12 @@ sudo apt install chromium-browser -yq
 # install JetBrains Toolbox:
 # TODO: this is a specific app version; we may need to occasionally update the file-path version (last updated 2021-08):
 jetbrains_tarball="jetbrains-toolbox-1.21.9712.tar.gz"
-wget https://download.jetbrains.com/toolbox/$jetbrains_tarball -P ~/Downloads
+downloaded_tarball=/home/$(whoami)/Downloads/$jetbrains_tarball
+wget --content-disposition https://download.jetbrains.com/toolbox/$jetbrains_tarball -P /home/$(whoami)/Downloads
 # n.b. we need to specify output directory or else tar will extract to pwd:
-tar -xf ~/Downloads/$jetbrains_tarball -C ~/Downloads
-rm ~/Downloads/$jetbrains_tarball
-echo "\njetbrains-toolbox AppImage saved to \/Downloads directory.\n"
+tar -xf $downloaded_tarball -C /home/$(whoami)/Downloads
+rm $downloaded_tarball
+echo "\n\njetbrains-toolbox AppImage saved to ~/Downloads.\nPlease run the AppImage.\n\n"
 sleep 2
 
 # ########## misc. ##########
