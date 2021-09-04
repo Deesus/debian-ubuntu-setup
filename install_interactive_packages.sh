@@ -1,4 +1,4 @@
-!/bin/bash
+#!/bin/bash
 
 # ########################################
 # Instructions/commands for installing setting up certain packages and configurations.
@@ -71,3 +71,9 @@ pip install --user pipenv
 
 # reinstall due to this issue: <https://stackoverflow.com/q/51225750>
 sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
+
+
+# ########## (OPTIONAL) disable alert sounds in Gnome: ##########
+# refernce: <https://askubuntu.com/q/1282170>
+gsettings set org.gnome.desktop.sound event-sounds false
+
