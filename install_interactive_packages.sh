@@ -9,13 +9,15 @@
 # N.b. you should first run the `install_packages.sh` file, as that script installs certain dependencies used here.
 # ########################################
 
-sudo apt update
 # to prevent execution of entire file:
 echo "This script needs to be run manually -- i.e. follow the instructions in the file and run the commands line-by-line."
 exit 1
 
-# ########## install Conda: ##########
+# ########## start here: ##########
+# update package repository if you haven't already:
+sudo apt update
 
+# ########## install Conda: ##########
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
 sh ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
 
@@ -65,7 +67,6 @@ docker pull tensorflow/tensorflow:latest-py3-jupyter
 echo "\nalias docker_tensorflow=\"docker run -u \$(id -u):\$(id -g) -it -p 8888:8888 tensorflow/tensorflow:latest-py3-jupyter\"" >> ~/.bash_aliases
 
 # ########## (OPTIONAL) install pip and pipenv: ##########
-
 sudo apt install python3-pip -yq
 pip install --user pipenv
 
