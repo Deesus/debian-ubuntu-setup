@@ -27,6 +27,10 @@ sh ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
 # ensure base environment isn't auto-activated <https://github.com/conda/conda/issues/8211>:
 conda config --set auto_activate_base false && conda deactivate
 
+# add conda-forge channel:
+conda config --add channels conda-forge
+conda config --set channel_priority strict
+
 # create a conda environment called "ml" (machine learning):
 conda create -n ml python=3.8 tensorflow jupyter matplotlib pandas
 
