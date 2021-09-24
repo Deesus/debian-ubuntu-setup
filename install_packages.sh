@@ -25,6 +25,7 @@ sudo apt install curl -yq
 sudo apt install neofetch -yq
 sudo apt install kompare -yq
 sudo snap install keepassxc
+wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 
 # ########## install apps: ##########
 sudo apt install chromium-browser -yq
