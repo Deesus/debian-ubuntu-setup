@@ -27,18 +27,18 @@ sh ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
 # ensure base environment isn't auto-activated <https://github.com/conda/conda/issues/8211>:
 conda config --set auto_activate_base false && conda deactivate
 
+# Install Mambda for fast package management <https://github.com/mamba-org/mamba>:
+conda install mamba -n base -c conda-forge
+
+# create a conda environment called "ml" (machine learning):
+mamba create -n ml python=3.8 tensorflow jupyter matplotlib pandas seaborn nltk
+
 # TODO: I don't think this is needed anymore If using Mamba:
 # # replace default channel with conda-forge channel:
 # # n.b. we don't want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
 # conda config --add channels conda-forge
 # conda config --remove channels defaults
 # conda config --set channel_priority strict
-
-# Install Mambda for fast package management <https://github.com/mamba-org/mamba>:
-conda install mamba -n base -c conda-forge
-
-# create a conda environment called "ml" (machine learning):
-mamba create -n ml python=3.8 tensorflow jupyter matplotlib pandas seaborn nltk
 
 # ########## Docker-post install steps: ##########
 # <https://docs.docker.com/engine/install/linux-postinstall/>
