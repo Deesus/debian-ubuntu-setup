@@ -28,6 +28,13 @@ sudo apt install scrcpy -yq # remember to "Allow USB debugging" on your phone in
 sudo snap install keepassxc
 wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 
+# ########## install youtube-dl: ##########
+# See documentation on configuration: <https://github.com/ytdl-org/youtube-dl/blob/master/README.md>
+sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+echo "# Download all videos to Videos folder:" | tee -a ~/etc/youtube-dl.conf
+echo "-o ~/Videos/%(title)s.%(ext)s" | tee -a ~/etc/youtube-dl.conf
+
 # ########## install pip and pipenv: ##########
 sudo apt install python3-pip -yq
 pip instsall --user pipenv
