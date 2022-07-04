@@ -28,6 +28,12 @@ sudo apt install scrcpy -yq # remember to "Allow USB debugging" on your phone in
 sudo snap install keepassxc
 wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 
+# ########## install pip and pipenv: ##########
+sudo apt install python3-pip -yq
+pip instsall --user pipenv
+PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
+PATH="$PATH:$PYTHON_BIN_PATH"
+
 # ########## install apps: ##########
 sudo apt install chromium-browser -yq
 
