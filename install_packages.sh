@@ -69,5 +69,15 @@ echo \
 sudo apt update
 sudo apt-get install docker-ce docker-compose docker-ce-cli containerd.io -yq
 
+# Enable Docker BuildKit by default <https://docs.docker.com/develop/develop-images/build_enhancements/>:
+sudo bash -c 'cat << EOF >> /etc/docker/daemon.json
+{
+    "features": {
+       "buildkit": true
+    }
+}
+EOF'
+
+
 echo "\n\nIMPORTANT: Remember to run the manual-install-script after installation!\n\n"
 sleep 2
