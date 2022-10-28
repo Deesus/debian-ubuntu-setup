@@ -31,7 +31,9 @@ conda config --set auto_activate_base false && conda deactivate
 conda install mamba -n base -c conda-forge
 
 # create a conda environment called "ml" (machine learning):
-mamba create -n ml python=3.10 tensorflow jupyter matplotlib pandas spacy
+mamba create -n ml python=3.10 tensorflow jupyter matplotlib pandas
+
+# TODO: should install spacy via pip
 
 # # replace default channel with conda-forge channel:
 # # n.b. we don't want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
