@@ -30,17 +30,17 @@ conda config --set auto_activate_base false && conda deactivate
 # install Mambda for fast package management <https://github.com/mamba-org/mamba>:
 conda install mamba -n base -c conda-forge
 
-# create a conda environment called "ml" (machine learning):
-mamba create -n ml python=3.10 tensorflow jupyter matplotlib pandas
-
-# TODO: should install spacy via pip
-
 # # replace default channel with conda-forge channel:
 # # n.b. we don't want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
 # # also, conda-forge is open source, while Anaconda packages are neither open source nor free for comercial use <https://www.anaconda.com/blog/anaconda-commercial-edition-faq>
-# conda config --add channels conda-forge
-# conda config --remove channels defaults
-# conda config --set channel_priority strict
+conda config --add channels conda-forge
+conda config --remove channels defaults
+conda config --set channel_priority strict
+
+# create a conda environment called "ml" (machine learning):
+mamba create -n ml python=3.10 tensorflow jupyter matplotlib pandas
+# TODO: after activing Conda environment, should install spacy via pip
+# TODO: also install Hugging Face inside conda environment
 
 # ########## Docker-post install steps: ##########
 # <https://docs.docker.com/engine/install/linux-postinstall/>
@@ -61,8 +61,8 @@ sudo systemctl enable containerd.service
 
 
 # ########## install nvm and NodeJS: ##########
-# TODO: you might want to check if this is latest version of nvm before running script:
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
+# TODO: you might want to check if this is latest version of nvm before running script <https://github.com/nvm-sh/nvm/releases>:
+wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
 
 # TODO: after installation is done, restart terminal before continuing:
 nvm install --lts && nvm use --lts
