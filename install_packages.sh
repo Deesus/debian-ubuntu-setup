@@ -38,6 +38,7 @@ PATH="$PATH:$PYTHON_BIN_PATH"
 
 # Install non-Snap Chromium:
 # See <https://askubuntu.com/q/1386738>
+sudo apt remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra
 echo "deb http://packages.linuxmint.com vanessa upstream" | sudo tee /etc/apt/sources.list.d/mint-vanessa.list
 sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com A1715D88E1DF1F24 40976EAF437D05B5 3B4FE6ACC0B21F32 A6616109451BBBF2
 
