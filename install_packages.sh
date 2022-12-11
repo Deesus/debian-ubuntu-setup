@@ -25,7 +25,7 @@ sudo apt install curl -yq
 sudo apt install neofetch -yq
 sudo apt install kompare -yq
 sudo apt install scrcpy -yq # remember to "Allow USB debugging" on your phone in order for scrcpy to work!
-sudo snap install keepassxc
+sudo apt install keepassxc -yq
 wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 
 # ########## install pip and pipenv: ##########
@@ -35,7 +35,7 @@ PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 PATH="$PATH:$PYTHON_BIN_PATH"
 
 # ########## install apps: ##########
-sudo apt install chromium-browser -yq
+
 
 # install JetBrains Toolbox:
 # TODO: this is a specific app version; we may need to occasionally update the file-path version (last updated 2021-08):
