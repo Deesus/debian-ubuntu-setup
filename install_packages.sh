@@ -36,6 +36,23 @@ PATH="$PATH:$PYTHON_BIN_PATH"
 
 # ########## install apps: ##########
 
+# Install non-Snap Chromium:
+# See <https://askubuntu.com/q/1386738>
+echo "deb http://packages.linuxmint.com vanessa upstream" | sudo tee /etc/apt/sources.list.d/mint-vanessa.list
+sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com A1715D88E1DF1F24 40976EAF437D05B5 3B4FE6ACC0B21F32 A6616109451BBBF2
+
+cat <<EOF | sudo tee /etc/apt/preferences.d/pin-chromium
+Package: *
+Pin: release o=linuxmint
+Pin-Priority: -1
+
+Package: chromium
+Pin: release o=linuxmint
+Pin-Priority: 1000
+EOF
+
+sudo apt update
+sudo apt install chromium
 
 # install JetBrains Toolbox:
 # TODO: this is a specific app version; we may need to occasionally update the file-path version (last updated 2021-08):
