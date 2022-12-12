@@ -34,9 +34,7 @@ pip instsall --user pipenv
 PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 PATH="$PATH:$PYTHON_BIN_PATH"
 
-# ########## install apps: ##########
-
-# Install non-Snap Chromium:
+# ########## Install non-Snap Chromium: ##########
 # See <https://askubuntu.com/q/1386738>
 sudo apt remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra
 echo "deb http://packages.linuxmint.com vanessa upstream" | sudo tee /etc/apt/sources.list.d/mint-vanessa.list
@@ -55,6 +53,29 @@ EOF
 sudo apt update
 sudo apt install chromium
 
+# ########## Install non-Snap Firefox: ##########
+# See <https://askubuntu.com/a/1404401>
+sudo snap remove --purge firefox
+sudo add-apt-repository ppa:mozillateam/ppa
+
+# Prioritize the apt version over Snap version of Firefox:
+echo '
+Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+
+Package: firefox
+Pin: version 1:1snap1-0ubuntu2
+Pin-Priority: -1
+' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+
+sudo apt install firefox
+
+# Ensure that unattended upgrades do not reinstall the snap version of Firefox:
+echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+
+# ########## Install misc apps: ##########
 # install JetBrains Toolbox:
 # TODO: this is a specific app version; we may need to occasionally update the file-path version (last updated 2021-08):
 jetbrains_tarball="jetbrains-toolbox-1.21.9712.tar.gz"
