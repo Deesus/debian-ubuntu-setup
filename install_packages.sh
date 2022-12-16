@@ -36,7 +36,7 @@ PATH="$PATH:$PYTHON_BIN_PATH"
 
 # ########## Install non-Snap Chromium: ##########
 # See <https://askubuntu.com/q/1386738>
-sudo apt remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra
+sudo apt remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra -yq
 echo "deb http://packages.linuxmint.com vanessa upstream" | sudo tee /etc/apt/sources.list.d/mint-vanessa.list
 sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com A1715D88E1DF1F24 40976EAF437D05B5 3B4FE6ACC0B21F32 A6616109451BBBF2
 
@@ -51,7 +51,7 @@ Pin-Priority: 1000
 EOF
 
 sudo apt update
-sudo apt install chromium
+sudo apt install chromium -yq
 
 # ########## Install non-Snap Firefox: ##########
 # See <https://askubuntu.com/a/1404401>
@@ -69,7 +69,7 @@ Pin: version 1:1snap1-0ubuntu2
 Pin-Priority: -1
 ' | sudo tee /etc/apt/preferences.d/mozilla-firefox
 
-sudo apt install firefox
+sudo apt install firefox -yq
 
 # Ensure that unattended upgrades do not reinstall the snap version of Firefox:
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
