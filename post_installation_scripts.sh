@@ -17,6 +17,21 @@ exit 1
 # update package repository if you haven't already:
 sudo apt update
 
+
+# ########## Purge ALL Snap packages: ##########
+# TODO: To completely remove Snap packages, follow these steps:
+# snap list
+# sudo snap remove EACH_SNAP_PACKAGE
+# sudo apt purge snapd
+
+# TODO: next, you'll want clean up by deleting this folder:
+# sudo rm -rf ~/snap
+
+# TODO: There might be additional Snap folders, check if they exist, then delete:
+# sudo rm -rf /snap
+# sudo rm -rf /var/snap
+# sudo rm -rf /var/lib/snapd
+
 # ########## install Conda: ##########
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
 sh ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
