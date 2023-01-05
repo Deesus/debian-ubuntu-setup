@@ -34,7 +34,8 @@ sudo apt update
 
 # ########## install Conda: ##########
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
-sh ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
+# N.b. we use `bash` command and NOT `sh` (the latter throws errors):
+bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
 
 # TODO: follow the instructions in the Conda interactive installation
 # TODO: after installing minconda, restart your terminal before continuing:
