@@ -20,6 +20,7 @@ sudo apt update
 
 # ########## install useful packages: ##########
 sudo apt install git -yq
+git config --global init.defaultBranch master
 sudo apt install neovim -yq
 sudo apt install curl -yq
 sudo apt install neofetch -yq
