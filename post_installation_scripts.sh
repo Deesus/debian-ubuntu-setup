@@ -54,9 +54,9 @@ conda config --remove channels defaults
 conda config --set channel_priority strict
 
 # create a conda environment called "ml" (machine learning):
-mamba create -n ml tensorflow jupyter matplotlib pandas scikit-learn
+mamba create -n ml python=3.10 tensorflow jupyter matplotlib pandas scikit-learn
 # TODO: after activing Conda environment, should install spacy via pip
-# TODO: also install Hugging Face inside conda environment
+# TODO: also install Hugging Face (inside conda environment): `mamba install transformers`
 
 # ########## Docker-post install steps: ##########
 # <https://docs.docker.com/engine/install/linux-postinstall/>
@@ -86,6 +86,11 @@ nvm install --lts && nvm use --lts
 
 # ########## misc. ##########
 # N.b. the rest of this script includes optional/alternatives packages that may be useful in certain cases
+
+# ########## (OPTIONAL) Associate magnet links with BitTorrent client: ##########
+# 1. Locate your client/app in `/usr/share/applications/`
+# 2. In the terminal enter `xdg-mime default DESKTOP_CONF_FILE x-scheme-handler/magnet` where DESKTOP_CONF_FILE is the name of the .desktop file in `/usr/share/applications/`
+#    E.g. `xdg-mime default org.kde.ktorrent.desktop x-scheme-handler/magnet` for KTorrent or `xdg-mime default transmission-gtk.desktop x-scheme-handler/magnet` for Transmission.
 
 # ########## (OPTIONAL) download TensorFlow Docker image: ##########
 # The Docker version of TensorFlow enables GPU. On the other hand, the "normal" conda installation runs TensorFlow on CPU.
