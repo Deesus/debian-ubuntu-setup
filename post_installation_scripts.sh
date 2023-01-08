@@ -54,7 +54,7 @@ conda config --remove channels defaults
 conda config --set channel_priority strict
 
 # create a conda environment called "ml" (machine learning):
-mamba create -n ml python=3.10 tensorflow jupyter matplotlib pandas scikit-learn
+mamba create -n ml python=3.10 tensorflow jupyterlab matplotlib pandas scikit-learn
 # TODO: after activing Conda environment, should install spacy via pip
 # TODO: also install Hugging Face (inside conda environment): `mamba install transformers`
 
