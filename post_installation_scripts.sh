@@ -45,6 +45,7 @@ conda config --set auto_activate_base false && conda deactivate
 
 # install Mambda for fast package management <https://github.com/mamba-org/mamba>:
 conda install mamba -n base -c conda-forge
+mamba init
 
 # # replace default channel with conda-forge channel:
 # # n.b. we don't want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
