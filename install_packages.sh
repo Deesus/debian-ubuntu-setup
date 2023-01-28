@@ -24,11 +24,11 @@ git config --global init.defaultBranch master
 sudo apt install neovim -yq
 sudo apt install curl -yq
 sudo apt install neofetch -yq
-sudo apt install kompare -yq
-sudo apt install scrcpy -yq # remember to "Allow USB debugging" on your phone in order for scrcpy to work!
-sudo apt install keepassxc -yq
-sudo apt install default-jre -yq
-wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+sudo apt install kompare -yq  # File diffing library (e.g. for Dolphin)
+sudo apt install scrcpy -yq  # Anroid screen capture library. Remember to "Allow USB debugging" on your phone in order for scrcpy to work!
+sudo apt install keepassxc -yq  # Password manager
+sudo apt install default-jre -yq  # Java
+wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash  # Joplin notetaking app
 
 # ########## install pip and pipenv: ##########
 sudo apt install python3-pip -yq
