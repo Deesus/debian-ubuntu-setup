@@ -40,19 +40,19 @@ bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
 # TODO: follow the instructions in the Conda interactive installation
 # TODO: after installing minconda, restart your terminal before continuing:
 
-# ensure base environment isn't auto-activated <https://github.com/conda/conda/issues/8211>:
+# Ensure base environment isn't auto-activated <https://github.com/conda/conda/issues/8211>:
 conda config --set auto_activate_base false && conda deactivate
 
-# install Mambda for fast package management <https://github.com/mamba-org/mamba>:
-conda install mamba -n base -c conda-forge
-mamba init
-
-# # replace default channel with conda-forge channel:
-# # n.b. we don't want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
-# # also, conda-forge is open source, while Anaconda packages are neither open source nor free for comercial use <https://www.anaconda.com/blog/anaconda-commercial-edition-faq>
+# Replace default channel with conda-forge channel:
+# N.b. we don't Want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
+# Also, conda-forge is open source, while Anaconda packages are neither open source nor free for comercial use <https://www.anaconda.com/blog/anaconda-commercial-edition-faq>
 conda config --add channels conda-forge
 conda config --remove channels defaults
 conda config --set channel_priority strict
+
+# Install Mamba for fast package management <https://github.com/mamba-org/mamba>:
+conda install mamba -n base -c conda-forge
+mamba init
 
 # create a conda environment called "ml" (machine learning):
 mamba create -n ml python=3.10 tensorflow jupyterlab matplotlib pandas scikit-learn jupytext
