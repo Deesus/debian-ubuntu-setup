@@ -111,3 +111,5 @@ sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
 # refernce: <https://askubuntu.com/q/1282170>
 gsettings set org.gnome.desktop.sound event-sounds false
 
+# To disable the Google One Tap sign-up prompts <https://superuser.com/q/1414410>, in uBlock Origin's "My Filters," add the following: `accounts.google.com/gsi/iframe/$subdocument`
+

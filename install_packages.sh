@@ -79,7 +79,7 @@ echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codenam
 
 
 # ########## Install misc apps: ##########
-# install JetBrains Toolbox:
+# Install JetBrains Toolbox:
 # TODO: this is a specific app version; we may need to occasionally update the file-path version (last updated 2021-08):
 jetbrains_tarball="jetbrains-toolbox-1.21.9712.tar.gz"
 downloaded_tarball=/home/$(whoami)/Downloads/$jetbrains_tarball
@@ -90,8 +90,11 @@ rm $downloaded_tarball
 echo "\n\njetbrains-toolbox AppImage saved to ~/Downloads.\nPlease run the AppImage.\n\n"
 sleep 2
 
-# ########## misc. ##########
-# create bash aliases file:
+# Install yt-dlp <https://github.com/yt-dlp/yt-dlp>:
+python3 -m pip install -U yt-dlp
+
+# ########## Misc. ##########
+# Create bash aliases file:
 touch ~/.bash_aliases
 
 # ########## install Docker: ##########
