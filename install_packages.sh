@@ -18,7 +18,7 @@ fi
 # start of installation:
 sudo apt update
 
-# ########## install useful packages: ##########
+# ########## Install useful packages: ##########
 sudo apt install git -yq
 git config --global init.defaultBranch master
 sudo apt install neovim -yq
@@ -31,11 +31,16 @@ sudo apt install keepassxc -yq  # Password manager
 sudo apt install default-jre -yq  # Java
 wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash  # Joplin notetaking app
 
-# ########## install pip and pipenv: ##########
+# ########## Install pip and pipenv: ##########
 sudo apt install python3-pip -yq
 pip instsall --user pipenv
 PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 PATH="$PATH:$PYTHON_BIN_PATH"
+
+# ########## Install pnpm and Node.js: ##########
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+source ~/.bashrc
+pnpm env use --global lts
 
 # ########## Install non-Snap Chromium: ##########
 # See <https://askubuntu.com/q/1386738>
@@ -91,6 +96,8 @@ echo "\n\njetbrains-toolbox AppImage saved to ~/Downloads.\nPlease run the AppIm
 sleep 2
 
 # Install yt-dlp <https://github.com/yt-dlp/yt-dlp>:
+# Basic usage: `yt-dlp URL_TO_DOWNLOAD`:
+# Usage for downloading best quality: `yt-dlp -f best URL_TO_DOWNLOAD`
 python3 -m pip install -U yt-dlp
 
 # ########## Misc. ##########

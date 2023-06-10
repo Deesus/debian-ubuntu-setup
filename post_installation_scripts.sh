@@ -76,15 +76,6 @@ docker run hello-world
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 
-
-# ########## install nvm and NodeJS: ##########
-# TODO: you might want to check if this is latest version of nvm before running script <https://github.com/nvm-sh/nvm/releases>:
-wget -qO- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.2/install.sh | bash
-
-# TODO: after installation is done, restart terminal before continuing:
-nvm install --lts && nvm use --lts
-
-
 # ########## misc. ##########
 # N.b. the rest of this script includes optional/alternatives packages that may be useful in certain cases
 
