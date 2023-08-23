@@ -104,6 +104,11 @@ python3 -m pip install -U yt-dlp
 # Create bash aliases file:
 touch ~/.bash_aliases
 
+# Disable Bluetooth autosuspend
+# autosuspend is a power saving feature, but causes Bluetooth mouse delay/lag if inactive for a few seconds:
+echo "options btusb enable_autosuspend=0" | sudo tee /etc/modprobe.d/disable_btusb-autosuspend.conf
+# To undo this procedure, do `sudo rm /etc/modprobe.d/disable_btusb-autosuspend.conf`
+
 # ########## install Docker: ##########
 sudo apt-get install \
     apt-transport-https \
