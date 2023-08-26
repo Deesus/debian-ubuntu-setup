@@ -9,7 +9,7 @@
 # N.b. you should first run the `install_packages.sh` file, as that script installs certain dependencies used here.
 # ########################################
 
-# to prevent execution of entire file:
+# To prevent execution of entire file:
 echo "This script needs to be run manually -- i.e. follow the instructions in the file and run the commands line-by-line."
 exit 1
 
@@ -32,7 +32,7 @@ sudo apt update
 # sudo rm -rf /var/snap
 # sudo rm -rf /var/lib/snapd
 
-# ########## install Conda: ##########
+# ########## Install Conda: ##########
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
 # N.b. we use `bash` command and NOT `sh` (the latter throws errors):
 bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
@@ -54,7 +54,7 @@ conda config --set channel_priority strict
 conda install mamba -n base -c conda-forge
 mamba init
 
-# create a conda environment called "ml" (machine learning):
+# Create a conda environment called "ml" (machine learning):
 mamba create -n ml python=3.10 tensorflow jupyterlab matplotlib pandas scikit-learn jupytext
 # TODO: after activing Conda environment, should install spacy via pip
 # TODO: also install Hugging Face (inside conda environment): `mamba install transformers`
@@ -62,17 +62,17 @@ mamba create -n ml python=3.10 tensorflow jupyterlab matplotlib pandas scikit-le
 # ########## Docker-post install steps: ##########
 # <https://docs.docker.com/engine/install/linux-postinstall/>
 
-# run Docker without root privileges -- n.b. this can be a security issue in some cases <https://docs.docker.com/engine/security/#docker-daemon-attack-surface>
+# Run Docker without root privileges -- n.b. this can be a security issue in some cases <https://docs.docker.com/engine/security/#docker-daemon-attack-surface>
 sudo groupadd docker
 sudo usermod -aG docker $(whoami)
 
 # TODO: log out of your session and log back in before continuing with the next steps:
 newgrp docker
 
-# test that Docker was installed properly:
+# Test that Docker was installed properly:
 docker run hello-world
 
-# configure Docker to start on boot:
+# Configure Docker to start on boot:
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 
@@ -87,19 +87,19 @@ sudo systemctl enable containerd.service
 # ########## (OPTIONAL) download TensorFlow Docker image: ##########
 # The Docker version of TensorFlow enables GPU. On the other hand, the "normal" conda installation runs TensorFlow on CPU.
 docker pull tensorflow/tensorflow:latest-py3-jupyter
-# create aliases:
+# Create aliases:
 echo "\nalias docker_tensorflow=\"docker run -u \$(id -u):\$(id -g) -it -p 8888:8888 tensorflow/tensorflow:latest-py3-jupyter\"" >> ~/.bash_aliases
 
 # ########## (OPTIONAL) install pip and pipenv: ##########
 sudo apt install python3-pip -yq
 pip install --user pipenv
 
-# reinstall due to this issue: <https://stackoverflow.com/q/51225750>
+# Reinstall due to this issue: <https://stackoverflow.com/q/51225750>
 sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
 
 
 # ########## (OPTIONAL) disable alert sounds in Gnome: ##########
-# refernce: <https://askubuntu.com/q/1282170>
+# Refernce: <https://askubuntu.com/q/1282170>
 gsettings set org.gnome.desktop.sound event-sounds false
 
 # To disable the Google One Tap sign-up prompts <https://superuser.com/q/1414410>, in uBlock Origin's "My Filters," add the following: `accounts.google.com/gsi/iframe/$subdocument`
