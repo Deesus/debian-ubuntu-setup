@@ -76,6 +76,9 @@ docker run hello-world
 sudo systemctl enable docker.service
 sudo systemctl enable containerd.service
 
+# ########## Update system firmware: ##########
+fwupdmgr update
+
 # ########## misc. ##########
 # N.b. the rest of this script includes optional/alternatives packages that may be useful in certain cases
 
