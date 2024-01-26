@@ -15,7 +15,7 @@ then
     exit 1
 fi
 
-# start of installation:
+# Start of installation:
 sudo apt update
 
 # ########## Install useful packages: ##########
