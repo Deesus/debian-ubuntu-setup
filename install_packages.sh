@@ -33,7 +33,7 @@ wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_
 
 # ########## Install pip and pipenv: ##########
 sudo apt install python3-pip -yq
-pip instsall --user pipenv
+pip install --user pipenv
 PYTHON_BIN_PATH="$(python3 -m site --user-base)/bin"
 PATH="$PATH:$PYTHON_BIN_PATH"
 
