@@ -13,10 +13,15 @@
 echo "This script needs to be run manually -- i.e. follow the instructions in the file and run the commands line-by-line."
 exit 1
 
-# ########## start here: ##########
+# ########## Start here: ##########
 # update package repository if you haven't already:
 sudo apt update
 
+# ########## Config Git: ##########
+# TODO: change `Deesus` to your user name:
+git config --global user.name "Deesus"
+# TODO: change `Deesus@users.noreply.github.com` to your email address:
+git config --global user.email Deesus@users.noreply.github.com
 
 # ########## Purge ALL Snap packages: ##########
 # TODO: To completely remove Snap packages, follow these steps:
@@ -81,6 +86,16 @@ fwupdmgr update
 
 # ########## misc. ##########
 # N.b. the rest of this script includes optional/alternatives packages that may be useful in certain cases
+
+# ########## Fix lag in bluetooth devices: ##########
+# Fix bug where bluetooth device lags when it has been idle for a few seconds:
+# 1. Edit the grub file: `sudo nano /etc/default/grub`
+# 2. Check for the line contianing `GRUB_CMDLINE_LINUX_DEFAULT`
+# 3. Append `btusb.enable_autosuspend=0` to the existing value. For example, if the field was previously `GRUB_CMDLINE_LINUX_DEFAULT="quiet"`
+#    then change it to `GRUB_CMDLINE_LINUX_DEFAULT="quiet btusb.enable_autosuspend=0"`
+# 4. Save and close the file.
+# 5. Run `sudo update-grub`
+# 6. Reboot your system.
 
 # ########## (OPTIONAL) Associate magnet links with BitTorrent client: ##########
 # 1. Locate your client/app in `/usr/share/applications/`
