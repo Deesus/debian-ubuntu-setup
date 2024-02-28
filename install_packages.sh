@@ -23,6 +23,7 @@ sudo apt install git -yq
 git config --global init.defaultBranch master
 sudo apt install neovim -yq
 sudo apt install curl -yq
+sudo apt install nala -yq
 sudo apt install neofetch -yq
 sudo apt install kompare -yq  # File diffing library (e.g. for Dolphin)
 sudo apt install scrcpy -yq  # Anroid screen capture library. Remember to "Allow USB debugging" on your phone in order for scrcpy to work!
