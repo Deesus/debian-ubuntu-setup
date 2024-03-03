@@ -1,12 +1,8 @@
 #!/bin/bash
 
 # ########################################
-# Instructions/commands for installing setting up certain packages and configurations.
-# 
-# Please follow the instructions and install each package in the terminal.
-# Because this script install interactive packages, it cannot be run entirely via a single command.
-# 
-# N.b. you should first run the `install_packages.sh` file, as that script installs certain dependencies used here.
+# All of these packages and fixes are OPTIONAL.
+# Read the instructions and run only the commands that you need for your machine.
 # ########################################
 
 # To prevent execution of entire file:
@@ -17,75 +13,69 @@ exit 1
 # update package repository if you haven't already:
 sudo apt update
 
-# ########## Config Git: ##########
-# TODO: change `Deesus` to your user name:
-git config --global user.name "Deesus"
-# TODO: change `Deesus@users.noreply.github.com` to your email address:
-git config --global user.email Deesus@users.noreply.github.com
+# ########## Install non-Snap Chromium (Ubuntu-based distros only): ##########
+# See <https://askubuntu.com/q/1386738>
+sudo apt remove chromium-browser chromium-browser-l10n chromium-codecs-ffmpeg-extra -yq
+echo "deb http://packages.linuxmint.com vanessa upstream" | sudo tee /etc/apt/sources.list.d/mint-vanessa.list
+sudo apt-key adv --recv-keys --keyserver keyserver.ubuntu.com A1715D88E1DF1F24 40976EAF437D05B5 3B4FE6ACC0B21F32 A6616109451BBBF2
 
-# ########## Purge ALL Snap packages: ##########
+cat <<EOF | sudo tee /etc/apt/preferences.d/pin-chromium
+Package: *
+Pin: release o=linuxmint
+Pin-Priority: -1
+
+Package: chromium
+Pin: release o=linuxmint
+Pin-Priority: 1000
+EOF
+
+sudo apt update
+sudo apt install chromium -yq
+
+# ########## Install non-Snap Firefox (Ubuntu-based distros only): ##########
+# See <https://askubuntu.com/a/1404401>
+sudo snap remove --purge firefox
+sudo add-apt-repository ppa:mozillateam/ppa
+
+# Prioritize the apt version over Snap version of Firefox:
+echo '
+Package: *
+Pin: release o=LP-PPA-mozillateam
+Pin-Priority: 1001
+
+Package: firefox
+Pin: version 1:1snap1-0ubuntu2
+Pin-Priority: -1
+' | sudo tee /etc/apt/preferences.d/mozilla-firefox
+
+sudo apt install firefox -yq
+
+# Ensure that unattended upgrades do not reinstall the snap version of Firefox:
+echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
+
+# ########## Purge ALL Snap packages (Ubuntu-based distros only): ##########
 # TODO: To completely remove Snap packages, follow these steps:
-# snap list
-# sudo snap remove EACH_SNAP_PACKAGE
-# sudo apt purge snapd
+snap list
+sudo snap remove EACH_SNAP_PACKAGE
+sudo apt purge snapd
 
 # TODO: next, you'll want clean up by deleting this folder:
-# sudo rm -rf ~/snap
+sudo rm -rf ~/snap
 
 # TODO: There might be additional Snap folders, check if they exist, then delete:
-# sudo rm -rf /snap
-# sudo rm -rf /var/snap
-# sudo rm -rf /var/lib/snapd
-
-# ########## Install Conda: ##########
-wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
-# N.b. we use `bash` command and NOT `sh` (the latter throws errors):
-bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
-
-# TODO: follow the instructions in the Conda interactive installation
-# TODO: after installing minconda, restart your terminal before continuing:
-
-# Ensure base environment isn't auto-activated <https://github.com/conda/conda/issues/8211>:
-conda config --set auto_activate_base false && conda deactivate
-
-# Replace default channel with conda-forge channel:
-# N.b. we don't Want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
-# Also, conda-forge is open source, while Anaconda packages are neither open source nor free for comercial use <https://www.anaconda.com/blog/anaconda-commercial-edition-faq>
-conda config --add channels conda-forge
-conda config --remove channels defaults
-conda config --set channel_priority strict
-
-# Install Mamba for fast package management <https://github.com/mamba-org/mamba>:
-conda install mamba -n base -c conda-forge
-mamba init
-
-# Create a conda environment called "ml" (machine learning):
-mamba create -n ml python=3.10 tensorflow jupyterlab matplotlib pandas scikit-learn jupytext
-# TODO: after activing Conda environment, should install spacy via pip
-# TODO: also install Hugging Face (inside conda environment): `mamba install transformers`
-
-# ########## Docker-post install steps: ##########
-# <https://docs.docker.com/engine/install/linux-postinstall/>
-
-# Run Docker without root privileges -- n.b. this can be a security issue in some cases <https://docs.docker.com/engine/security/#docker-daemon-attack-surface>
-sudo groupadd docker
-sudo usermod -aG docker $(whoami)
-
-# TODO: log out of your session and log back in before continuing with the next steps:
-newgrp docker
-
-# Test that Docker was installed properly:
-docker run hello-world
-
-# Configure Docker to start on boot:
-sudo systemctl enable docker.service
-sudo systemctl enable containerd.service
+sudo rm -rf /snap
+sudo rm -rf /var/snap
+sudo rm -rf /var/lib/snapd
 
 # ########## Update system firmware: ##########
 fwupdmgr update
 
-# ########## misc. ##########
-# N.b. the rest of this script includes optional/alternatives packages that may be useful in certain cases
+# ########## Misc. ##########
+
+# Disable Bluetooth autosuspend
+# autosuspend is a power saving feature, but causes Bluetooth mouse delay/lag if inactive for a few seconds:
+echo "options btusb enable_autosuspend=0" | sudo tee /etc/modprobe.d/disable_btusb-autosuspend.conf
+# To undo this procedure, do `sudo rm /etc/modprobe.d/disable_btusb-autosuspend.conf`
 
 # ########## Fix lag in bluetooth devices: ##########
 # Fix bug where bluetooth device lags when it has been idle for a few seconds:
@@ -102,23 +92,23 @@ fwupdmgr update
 # 2. In the terminal enter `xdg-mime default DESKTOP_CONF_FILE x-scheme-handler/magnet` where DESKTOP_CONF_FILE is the name of the .desktop file in `/usr/share/applications/`
 #    E.g. `xdg-mime default org.kde.ktorrent.desktop x-scheme-handler/magnet` for KTorrent or `xdg-mime default transmission-gtk.desktop x-scheme-handler/magnet` for Transmission.
 
-# ########## (OPTIONAL) download TensorFlow Docker image: ##########
-# The Docker version of TensorFlow enables GPU. On the other hand, the "normal" conda installation runs TensorFlow on CPU.
-docker pull tensorflow/tensorflow:latest-py3-jupyter
-# Create aliases:
-echo "\nalias docker_tensorflow=\"docker run -u \$(id -u):\$(id -g) -it -p 8888:8888 tensorflow/tensorflow:latest-py3-jupyter\"" >> ~/.bash_aliases
-
-# ########## (OPTIONAL) install pip and pipenv: ##########
+# ########## Optional packages: ##########
+# Python Pip3:
 sudo apt install python3-pip -yq
-pip install --user pipenv
-
 # Reinstall due to this issue: <https://stackoverflow.com/q/51225750>
 sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
 
+# Java Runtime Environment (JRE):
+sudo apt install default-jre -yq
 
-# ########## (OPTIONAL) disable alert sounds in Gnome: ##########
+# Joplin notetaking app:
+wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
+
+# ########## Disable alert sounds in Gnome: ##########
 # Refernce: <https://askubuntu.com/q/1282170>
 gsettings set org.gnome.desktop.sound event-sounds false
 
-# To disable the Google One Tap sign-up prompts <https://superuser.com/q/1414410>, in uBlock Origin's "My Filters," add the following: `accounts.google.com/gsi/iframe/$subdocument`
+# ########## Disable the Google One Tap sign-up prompts: ##########
+# To disable the Google One Tap sign-up prompts <https://superuser.com/q/1414410>,
+# in uBlock Origin's "My Filters," add the following: `accounts.google.com/gsi/iframe/$subdocument`
 
