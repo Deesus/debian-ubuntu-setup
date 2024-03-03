@@ -2,12 +2,12 @@
 
 # ########################################
 # Installs machine learning and web development packages.
-# After running the install script, you might want to install the "interactive" packages (also included in this repo).
-# 
-# Quick start: execute the file (DO NOT use sudo): `sh install_packages.sh`
+# After running the install script, you should run the post install script (`02_post_install.sh).
+#
+# Quick start: execute the file (DO NOT use sudo): `sh 01_install.sh`
 # ########################################
 
-# prevent script from running as root:
+# Prevent script from running as root:
 if [ $(whoami) = "root" ]
 then
     echo "\nDO NOT run this script with sudo!"
@@ -33,7 +33,8 @@ sudo apt install curl -yq
 sudo apt install nala -yq
 sudo apt install neofetch -yq
 sudo apt install kompare -yq  # File diffing library (e.g. for Dolphin)
-sudo apt install scrcpy -yq  # Android screen capture library. Remember to "Allow USB debugging" on your phone in order for scrcpy to work!
+sudo apt install scrcpy -yq  # Android screen capture lib. Remember to "Allow USB debugging" on your phone for scrcpy to work!
+sudo apt install screen -yq
 sudo apt install secure-delete -yq # secure-delete is better (more secure) than shred
 sudo apt install keepassxc -yq  # Password manager
 # yt-dlp <https://github.com/yt-dlp/yt-dlp>:
@@ -54,7 +55,7 @@ pnpm env use --global lts
 
 # ########## Install misc apps: ##########
 # Install JetBrains Toolbox:
-# TODO: this is a specific app version; we may need to occasionally update the file-path version (last updated 2024-03):
+# TODO: this is a specific app version; you may need to occasionally update the file-path version (last updated 2024-03):
 jetbrains_tarball="jetbrains-toolbox-2.2.2.20062.tar.gz"
 downloaded_tarball=~/Downloads/$jetbrains_tarball
 wget --content-disposition https://download.jetbrains.com/toolbox/$jetbrains_tarball -P ~/Downloads
@@ -101,27 +102,9 @@ sudo apt-get update
 sudo apt-get install docker-compose-plugin -yq
 docker compose version  # Verify Docker Compose installation
 
-# Install Conda:
+# ########## Install Conda: ##########
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
 # N.b. we use `bash` command and NOT `sh` (the latter throws errors):
 bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
 
-# "Restart" bash without restarting terminal:
-exec bash
-
-# Ensure base environment isn't auto-activated <https://github.com/conda/conda/issues/8211>:
-conda config --set auto_activate_base false && conda deactivate
-
-# Replace default channel with conda-forge channel:
-# N.b. we don't Want to have both default and conda-forge environments due to the extremely lengthy environment resolution time it takes <https://stackoverflow.com/a/66963979>
-# Also, conda-forge is open source, while Anaconda packages are neither open source nor free for comercial use <https://www.anaconda.com/blog/anaconda-commercial-edition-faq>
-conda config --add channels conda-forge
-conda config --remove channels defaults
-conda config --set channel_priority strict
-
-# Install Mamba for fast package management <https://github.com/mamba-org/mamba>:
-conda install mamba -n base -c conda-forge
-mamba init
-
-mamba create -n ml python=3.12 jupyterlab matplotlib pandas scikit-learn jupytext
-# TODO: also (inside your conda environment), you might want to install Hugging Face (`mamba install transformers`) and/or spacy (via pip)
+echo "\n\nRestart bash and run the '02_post_install.sh' script.\n"

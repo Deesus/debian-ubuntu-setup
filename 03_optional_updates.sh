@@ -10,8 +10,20 @@ echo "This script needs to be run manually -- i.e. follow the instructions in th
 exit 1
 
 # ########## Start here: ##########
-# update package repository if you haven't already:
+# Update package repository if you haven't already:
 sudo apt update
+
+# ########## Install optional packages: ##########
+# Python Pip3:
+sudo apt install python3-pip -yq
+# Reinstall due to this issue: <https://stackoverflow.com/q/51225750>
+sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
+
+# Java Runtime Environment (JRE):
+sudo apt install default-jre -yq
+
+# Joplin notetaking app:
+wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
 
 # ########## Install non-Snap Chromium (Ubuntu-based distros only): ##########
 # See <https://askubuntu.com/q/1386738>
@@ -54,61 +66,45 @@ sudo apt install firefox -yq
 echo 'Unattended-Upgrade::Allowed-Origins:: "LP-PPA-mozillateam:${distro_codename}";' | sudo tee /etc/apt/apt.conf.d/51unattended-upgrades-firefox
 
 # ########## Purge ALL Snap packages (Ubuntu-based distros only): ##########
-# TODO: To completely remove Snap packages, follow these steps:
 snap list
 sudo snap remove EACH_SNAP_PACKAGE
 sudo apt purge snapd
-
-# TODO: next, you'll want clean up by deleting this folder:
+# Clean up by deleting this folder:
 sudo rm -rf ~/snap
-
-# TODO: There might be additional Snap folders, check if they exist, then delete:
+# There might be additional Snap folders, check if they exist, then delete:
 sudo rm -rf /snap
 sudo rm -rf /var/snap
 sudo rm -rf /var/lib/snapd
 
-# ########## Update system firmware: ##########
-fwupdmgr update
-
-# ########## Misc. ##########
-
-# Disable Bluetooth autosuspend
-# autosuspend is a power saving feature, but causes Bluetooth mouse delay/lag if inactive for a few seconds:
-echo "options btusb enable_autosuspend=0" | sudo tee /etc/modprobe.d/disable_btusb-autosuspend.conf
-# To undo this procedure, do `sudo rm /etc/modprobe.d/disable_btusb-autosuspend.conf`
-
 # ########## Fix lag in bluetooth devices: ##########
+# Autosuspend is a power saving feature, but causes Bluetooth mouse delay/lag if inactive for a few seconds.
+# This section disables bluetooth autosuspend.
+
 # Fix bug where bluetooth device lags when it has been idle for a few seconds:
 # 1. Edit the grub file: `sudo nano /etc/default/grub`
-# 2. Check for the line contianing `GRUB_CMDLINE_LINUX_DEFAULT`
+# 2. Check for the line containing `GRUB_CMDLINE_LINUX_DEFAULT`
 # 3. Append `btusb.enable_autosuspend=0` to the existing value. For example, if the field was previously `GRUB_CMDLINE_LINUX_DEFAULT="quiet"`
 #    then change it to `GRUB_CMDLINE_LINUX_DEFAULT="quiet btusb.enable_autosuspend=0"`
 # 4. Save and close the file.
 # 5. Run `sudo update-grub`
 # 6. Reboot your system.
 
+# If the above method doesn't fix the issue, you may want to try running this command:
+# `echo "options btusb enable_autosuspend=0" | sudo tee /etc/modprobe.d/disable_btusb-autosuspend.conf`
+# And to undo this procedure, do `sudo rm /etc/modprobe.d/disable_btusb-autosuspend.conf`
+
 # ########## (OPTIONAL) Associate magnet links with BitTorrent client: ##########
 # 1. Locate your client/app in `/usr/share/applications/`
 # 2. In the terminal enter `xdg-mime default DESKTOP_CONF_FILE x-scheme-handler/magnet` where DESKTOP_CONF_FILE is the name of the .desktop file in `/usr/share/applications/`
 #    E.g. `xdg-mime default org.kde.ktorrent.desktop x-scheme-handler/magnet` for KTorrent or `xdg-mime default transmission-gtk.desktop x-scheme-handler/magnet` for Transmission.
 
-# ########## Optional packages: ##########
-# Python Pip3:
-sudo apt install python3-pip -yq
-# Reinstall due to this issue: <https://stackoverflow.com/q/51225750>
-sudo python3 -m pip uninstall pip && sudo apt install python3-pip --reinstall
-
-# Java Runtime Environment (JRE):
-sudo apt install default-jre -yq
-
-# Joplin notetaking app:
-wget -O - https://raw.githubusercontent.com/laurent22/joplin/dev/Joplin_install_and_update.sh | bash
-
 # ########## Disable alert sounds in Gnome: ##########
-# Refernce: <https://askubuntu.com/q/1282170>
+# Reference: <https://askubuntu.com/q/1282170>
 gsettings set org.gnome.desktop.sound event-sounds false
 
 # ########## Disable the Google One Tap sign-up prompts: ##########
 # To disable the Google One Tap sign-up prompts <https://superuser.com/q/1414410>,
 # in uBlock Origin's "My Filters," add the following: `accounts.google.com/gsi/iframe/$subdocument`
 
+# ########## Update system firmware: ##########
+fwupdmgr update
