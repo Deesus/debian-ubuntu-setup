@@ -1,11 +1,12 @@
-# Environment Setup for Ubuntu Machines:
+# Environment Setup for Debian/Ubuntu Machines:
 
-Installs web development and machine learning packages for Ubuntu (tested on 20.0.4 and 22.04).
+Installs web development and machine learning packages for Debian and Ubuntu.
 This is intended for local development machines; and therefore, is not suitable for servers.
 
 ### Quick Start:
-1. Run `sh install_packages.sh` to install packages (n.b do not use `sudo`).
-2. The `post_installation_scripts.sh` file is a guide for installing additional packages and configurations; read through the instructions (in the script file itself) to install selected packages.
+1. Run `sh 01_install.sh` (n.b do not use `sudo`).
+2. Run `sh 02_post_install.sh`
+3. The `03_optional_updates.sh` file has specific fixes and packages. Read through the file and install only what you need.
 
 ## License:
-Copyright © 2017-2023 Deepankara Reddy. BSD-2 License.
+Copyright © 2017-2024 Deepankara Reddy. BSD-2 License.
