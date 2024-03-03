@@ -105,6 +105,8 @@ docker compose version  # Verify Docker Compose installation
 # ########## Install Conda: ##########
 wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -P ~/Downloads/
 # N.b. we use `bash` command and NOT `sh` (the latter throws errors):
+# TODO: Follow the prompts. BE SURE TO SELECT "yes" ON WHETHER TO INITIALIZE CONDA ON STARTUP:
+# If you fail to do so, you will have to add the conda path to .bashrc manually.
 bash ~/Downloads/Miniconda3-latest-Linux-x86_64.sh
 
 echo "\n\nRestart bash and run the '02_post_install.sh' script.\n"
