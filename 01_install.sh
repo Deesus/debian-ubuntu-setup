@@ -18,6 +18,11 @@ fi
 # Start of installation:
 sudo apt update
 
+# ########## Bug fixes: ##########
+# Fixes AttributeError: 'NoneType' object has no attribute 'people'
+# See <https://www.linuxquestions.org/questions/debian-26/debian-bullseye-sid-add-apt-repository-not-working-python-problem-4175720821/> and <https://askubuntu.com/questions/1480616/adding-opencpn-repository-attributeerror-nonetype-object-has-no-attribute>:
+sudo apt-get install python3-launchpadlib -yq
+
 # ########## Setup Git: ##########
 sudo apt install git -yq
 
