@@ -23,8 +23,10 @@ sudo apt update
 # See <https://www.linuxquestions.org/questions/debian-26/debian-bullseye-sid-add-apt-repository-not-working-python-problem-4175720821/> and <https://askubuntu.com/questions/1480616/adding-opencpn-repository-attributeerror-nonetype-object-has-no-attribute>:
 sudo apt get install python3-launchpadlib -yq
 
-# Pipewire needed for screen sharing (e.g. OBS):
-sudo apt install pipewire -yq
+# ########## Replce pulseaudio with pipewire: ##########
+# Pipewire is needed for screen sharing (e.g. OBS):
+sudo apt purge pulseaudio pulseaudio-module-bluetooth -yq
+sudo apt install pipewire pipewire-audio -yq
 systemctl --user start pipewire
 
 # ########## Setup Git: ##########
